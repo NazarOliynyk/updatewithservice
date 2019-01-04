@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<!--<html xmlns:xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<head>
+    <meta charset="UTF-8"/>
+    <title>contactDetails</title>
+</head>
+<body>
+<form th:action="@{'/update'}" method="post">
+
+    <input type="hidden" name="id" placeholder="id" th:value="${contact.id}"/>
+    <input type="" name="name" placeholder="name" th:value="${contact.name}"/>
+    <input type="" name="email" placeholder="email" th:value="${contact.email}"/>
+    <input type="submit" name="" placeholder=""/>
+
+</form>
+
+</body>
+</html>

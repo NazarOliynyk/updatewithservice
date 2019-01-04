@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--<html xmlns:xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<html xmlns:th="http://www.thymeleaf.org" >
+<!--<html xmlns:xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home</title>
+</head>
+<body>
+<h1> Main Page </h1>
+
+<form th:action="@{/saveContact}" method="post">
+    <input type="" name="name" placeholder="name"/>
+    <input type="" name="email" placeholder="email"/>
+    <input type="" name="phoneList" placeholder="phoneList"/>
+    <input type="submit"/>
+</form>
+
+<ul>
+    <li th:each="contact :${contacts}">
+        <a th:href="@{'details- ' + ${contact.id}}" th:text="'details of contact- '+${contact.id}"></a>
+    </li>
+</ul>
+
+<!--<ol>-->
+    <!--<li th:each="contact :${contacts}">-->
+        <!--&lt;!&ndash;[[${u.id}]] [[${u.name}]] &ndash;&gt;-->
+        <!--&lt;!&ndash;at this moment when pointing at a certain user it will show localhost:8080/user- certainID    &ndash;&gt;-->
+        <!--<a th:href="'details- '+@{${contact.id}}" th:text="${contact.id}"></a>-->
+
+    <!--</li>-->
+<!--</ol>-->
+
+</body>
+</html>
