@@ -23,7 +23,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model){
-        model.addAttribute("contatcts", contactService.findAll());
+        model.addAttribute("contacts", contactService.findAll());
         return "home";
     }
     // we can assemble an object if parameters in html file have the same names as fields in the class(in this case -Contact)
