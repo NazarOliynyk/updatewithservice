@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+        <!--this is for lofination-->
+    <!--https://stackoverflow.com/questions/19091206/403-forbidden-error-with-ajax-get-request-spring-->
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <title>HomeAsyncImage</title>
 </head>
 <body>
@@ -17,6 +24,17 @@ HomeAsyncImage
 </form>
 
 <script>
+
+    // this function is for lofination
+    $(function () {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+    });
+
+
     console.log($('#f1')[0]);
     $('#btn').click(function (e) {
         e.preventDefault();

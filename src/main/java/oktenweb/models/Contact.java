@@ -20,7 +20,11 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    @Size(min = 3, max = 6, message = "hello {foo.message}")
+    @Size(min = 3, max = 26
+           // message = "hello {foo.message}"
+           // message = "hello foo.message"
+            )
+
     String name;
     String email;
 

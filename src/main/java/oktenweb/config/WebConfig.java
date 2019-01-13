@@ -34,6 +34,8 @@ public class WebConfig implements WebMvcConfigurer {
         validatorFactoryBean.setValidationMessageSource(messageSource());
         return validatorFactoryBean;
     }
+
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry) {
 
