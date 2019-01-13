@@ -1,35 +1,42 @@
 <!DOCTYPE html>
-<!--<html xmlns:xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">-->
-<html xmlns:th="http://www.thymeleaf.org" >
-<!--<html xmlns:xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">-->
-<head>
-    <meta charset="UTF-8"/>
-    <title>Home</title>
-</head>
+
+<!--<html xmlns:th="http://www.thymeleaf.org" >-->
+<html xmlns:xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<span th:replace="fragments::header('Title from fragments')"></span>
+<!--<span th:insert="~{fragments :: header(S{xxx})}"></span>-->
 <body>
+<h1 th:utext="#{asdqwe}"> </h1>
 <h1> Main Page </h1>
 
-<form th:action="@{/saveContact}" method="post">
-    <input type="" name="name" placeholder="name"/>
-    <input type="" name="email" placeholder="email"/>
-    <input type="" name="phoneList" placeholder="phoneList"/>
+<!--<form th:action="@{/saveContact}" method="post">-->
+    <!--<input type="" name="name" placeholder="name"/>-->
+    <!--<input type="" name="email" placeholder="email"/>-->
+    <!--<input type="" name="phoneList" placeholder="phoneList"/>-->
+    <!--<input type="submit"/>-->
+<!--</form>-->
+
+<form th:action="@{/saveContact}" method="post" th:object="${contact}" enctype="multipart/form-data">
+    <!--<input type="text" th:field="${contact.name}" placeholder="name"/>-->
+    <input type="text" th:field="*{name}" placeholder="name"/>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</p>
+    <!--this field is from contact-->
+    <input type="email" th:field="*{email}" placeholder="email"/>
+    <input type="text" th:field="*{phoneList}" placeholder="phoneList"/>
+    <input type="file" name="picture"/>
     <input type="submit"/>
 </form>
 
 <ul>
     <li th:each="contact :${contacts}">
         <a th:href="@{'details- ' + ${contact.id}}" th:text="'details of contact- '+${contact.id}"></a>
+        <div >
+            <img th:src="@{'/ava/'+${contact.avatar}}" alt=""/>
+        </div>
     </li>
 </ul>
 
-<!--<ol>-->
-    <!--<li th:each="contact :${contacts}">-->
-        <!--&lt;!&ndash;[[${u.id}]] [[${u.name}]] &ndash;&gt;-->
-        <!--&lt;!&ndash;at this moment when pointing at a certain user it will show localhost:8080/user- certainID    &ndash;&gt;-->
-        <!--<a th:href="'details- '+@{${contact.id}}" th:text="${contact.id}"></a>-->
 
-    <!--</li>-->
-<!--</ol>-->
 
 </body>
 </html>

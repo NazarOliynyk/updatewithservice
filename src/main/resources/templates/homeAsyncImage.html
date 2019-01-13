@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>HomeAsyncImage</title>
+</head>
+<body>
+HomeAsyncImage
+<form id="f1">
+
+    <input type="text" name="name" placeholder="name"/>
+    <input type="email" name="email" placeholder="email"/>
+    <input type="file" name="image" placeholder=""/>
+    <button id="btn">save with image</button>
+
+</form>
+
+<script>
+    console.log($('#f1')[0]);
+    $('#btn').click(function (e) {
+        e.preventDefault();
+        // it will not reload the page after pressing the button
+        $.ajax({
+            url:'/upload',
+            type: 'POST',
+            data: new FormData($('#f1')[0]),
+            enctype: 'multipart/form-data',
+            processData: false,  // forbids jquery to create JSON from our object
+            contentType: false,
+            cache: false,
+            success: function (res) {
+                console.log(res);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+// ajaxMultipartFormData snippet creates all above
+    });
+</script>
+
+</body>
+</html>

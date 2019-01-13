@@ -23,7 +23,7 @@ public class Phone {
                 fetch = FetchType.LAZY)
     Contact contact;
 
-    public Phone(String number) {
-        this.number = number;
-    }
+//    public Phone(String number) {
+//        this.number = number;
+//    }
 }
