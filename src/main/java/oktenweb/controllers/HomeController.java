@@ -1,12 +1,18 @@
 package oktenweb.controllers;
 
 import lombok.AllArgsConstructor;
+import oktenweb.dao.UserDAO;
 import oktenweb.models.Contact;
+import oktenweb.models.CustomUser;
 import oktenweb.models.Phone;
 import oktenweb.services.ContactService;
 import oktenweb.services.PhoneService;
 import oktenweb.services.editors.PhoneEditor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -24,13 +31,20 @@ public class HomeController {
     private ContactService contactService;
     private PhoneService phoneService;
 
-    @GetMapping("/")
-    public String home(Model model){
+    @GetMapping({"/", "/home"})
+    public String home(Model model, // these give the info of registered user in security
+                       @AuthenticationPrincipal Authentication authentication,
+                       @AuthenticationPrincipal Principal principal,
+                       @AuthenticationPrincipal UserDetails userDetails){
+       // System.out.println("1 "+authentication.getName());
+        //System.out.println("2 "+principal.getName());
+        //System.out.println("3 "+userDetails.getUsername());
+
         model.addAttribute("contacts", contactService.findAll());
         model.addAttribute("contact", new Contact("test", "test@test.com"));
-        //return "home";
+        return "home";
         //return "homeAsync";
-        return "homeAsyncImage";
+        //return "homeAsyncImage";
     }
     // we can assemble an object if parameters in html file have the same names as fields in the class(in this case -Contact)
     @PostMapping("/saveContact")
@@ -99,5 +113,21 @@ public class HomeController {
 //    }
 //@ResponseBody allovs to not to call page "ok!" at all
 
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @PostMapping("/saveUser")
+    public String saveUser(CustomUser customUser){
+        System.out.println(customUser);
+        String password = customUser.getPassword();
+        String encode = passwordEncoder.encode(password);
+        customUser.setPassword(encode);
 
+        // the simplified way
+       // customUser.setPassword(passwordEncoder.encode(customUser.getPassword()));
+
+        userDAO.save(customUser);
+        return "redirect:/home";
+    }
 }

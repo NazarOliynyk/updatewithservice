@@ -16,25 +16,35 @@
     <!--<input type="submit"/>-->
 <!--</form>-->
 
-<form th:action="@{/saveContact}" method="post" th:object="${contact}" enctype="multipart/form-data">
-    <!--<input type="text" th:field="${contact.name}" placeholder="name"/>-->
-    <input type="text" th:field="*{name}" placeholder="name"/>
-    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</p>
-    <!--this field is from contact-->
-    <input type="email" th:field="*{email}" placeholder="email"/>
-    <input type="text" th:field="*{phoneList}" placeholder="phoneList"/>
-    <input type="file" name="picture"/>
-    <input type="submit"/>
+<form th:action="@{/saveUser}" method="post">
+
+    <input type="text" name="username" placeholder="username" value="username"/>
+    <input type="password" name="password" placeholder="password" value="password"/>
+    <input type="submit" name="" placeholder="" value="save user"/>
 </form>
 
-<ul>
-    <li th:each="contact :${contacts}">
-        <a th:href="@{'details- ' + ${contact.id}}" th:text="'details of contact- '+${contact.id}"></a>
-        <div >
-            <img th:src="@{'/ava/'+${contact.avatar}}" alt=""/>
-        </div>
-    </li>
-</ul>
+
+
+
+<!--<form th:action="@{/saveContact}" method="post" th:object="${contact}" enctype="multipart/form-data">-->
+    <!--&lt;!&ndash;<input type="text" th:field="${contact.name}" placeholder="name"/>&ndash;&gt;-->
+    <!--<input type="text" th:field="*{name}" placeholder="name"/>-->
+    <!--<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</p>-->
+    <!--&lt;!&ndash;this field is from contact&ndash;&gt;-->
+    <!--<input type="email" th:field="*{email}" placeholder="email"/>-->
+    <!--<input type="text" th:field="*{phoneList}" placeholder="phoneList"/>-->
+    <!--<input type="file" name="picture"/>-->
+    <!--<input type="submit"/>-->
+<!--</form>-->
+
+<!--<ul>-->
+    <!--<li th:each="contact :${contacts}">-->
+        <!--<a th:href="@{'details- ' + ${contact.id}}" th:text="'details of contact- '+${contact.id}"></a>-->
+        <!--<div >-->
+            <!--<img th:src="@{'/ava/'+${contact.avatar}}" alt=""/>-->
+        <!--</div>-->
+    <!--</li>-->
+<!--</ul>-->
 
 
 
